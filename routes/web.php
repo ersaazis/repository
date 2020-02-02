@@ -11,7 +11,6 @@
 |
 */
 
-Route::get('/{slashData}', 'FilemanagerController@repo')->where('slashData', '(.*)');
 Route::group([
     'middleware' => ['web', \crocodicstudio\crudbooster\middlewares\CBBackend::class],
     'prefix' => cb()->getAdminPath(),
@@ -19,3 +18,4 @@ Route::group([
     Route::get('/filemanager', 'FilemanagerController@index')->name('filemanager');
     cb()->routeController('/users','AdminUsersController');
 });
+Route::get('/{slashData}', 'FilemanagerController@repo')->where('slashData', '(.*)');

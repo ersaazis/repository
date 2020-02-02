@@ -15,20 +15,35 @@ class FilemanagerController extends Controller
     public function index(){
         return view('filemanager');
     }
-    public function repo($slashData = null){
+    public function repo($slashData = null, Request $request){
         if(Storage::disk('share')->exists($slashData) and Storage::disk('share')->get($slashData)){
             $ext=pathinfo(storage_path($slashData),PATHINFO_EXTENSION);
             $viewerExt=array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'zip', 'rar');
-            if(in_array($ext,$viewerExt))
-                echo "Viewer file $slashData - $ext";
+            if(in_array($ext,$viewerExt) and $request->input('download') != 'yes')
+                return view('previewRepo')
+                    ->with('breadcrumb',explode('/',$slashData));
+
             else
-               echo "Download file $slashData - $ext";
+                return Storage::disk('share')->download($slashData);
         }
         else {
-            $files=Storage::disk('share')->files($slashData);
-            $directories=Storage::disk('share')->directories($slashData);
-            $data=array_merge($directories,$files);
-            return view('listRepo');
+            if($cari=$request->input('cari')){
+                $datafiles=Storage::disk('share')->allFiles();
+                $datafiles=preg_grep("/".str_replace(' ','.*',$cari)."/i", $datafiles);
+                $dataDirectories=Storage::disk('share')->allDirectories();    
+                $dataDirectories=preg_grep("/".str_replace(' ','.*',$cari)."/i", $dataDirectories);
+            }
+            else {
+                $datafiles=Storage::disk('share')->files($slashData);
+                $dataDirectories=Storage::disk('share')->directories($slashData);                    
+            }
+            $viewerExt=array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'zip', 'rar');
+            return view('listRepo')
+                ->with('viewerExt',$viewerExt)
+                ->with('datafiles',$datafiles)
+                ->with('dataDirectories',$dataDirectories)
+                ->with('slashData',$slashData)
+                ->with('breadcrumb',explode('/',$slashData));
         }
     }
 }
