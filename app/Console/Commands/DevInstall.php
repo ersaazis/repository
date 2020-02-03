@@ -3,23 +3,23 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Artisan;
+use Illuminate\Support\Facades\Artisan;
 
-class Backup extends Command
+class DevInstall extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'dev:backup';
+    protected $signature = 'dev:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'install application';
 
     /**
      * Create a new command instance.
@@ -38,6 +38,8 @@ class Backup extends Command
      */
     public function handle()
     {
-        Artisan::call('iseed cb_menus,cb_modules,cb_role_privileges,cb_roles,users --force');
+        Artisan::call('config:cache');
+        Artisan::call('cache:clear');
+        Artisan::call('migrate --seed');
     }
 }
