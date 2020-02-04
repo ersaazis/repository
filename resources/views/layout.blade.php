@@ -59,7 +59,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Cari Data</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                 <div class="modal-body">
-                    <form action="/">
+                    <form action="{{url()->current()}}">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
