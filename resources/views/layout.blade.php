@@ -14,7 +14,7 @@
 
 <body>
     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo" href="{{url('')}}">Repository</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container"><a class="navbar-brand logo" href="{{url('')}}">Repository <span class="text-success">Pascasarjana</span></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
                 id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
@@ -31,9 +31,17 @@
     <main class="page blog-post-list">
         <section class="clean-block clean-blog-list dark">
             <div class="container">
-                <div class="block-heading">
-                    <h2 class="text-success">Repository Pascasarjana</h2>
-                    <p>Universitas Islam Negri Sunan Gunung Djati Bandung</p>
+                <div class="block-heading text-left row">
+                    <div class="col-md-6 offset-md-3">
+                        <div class="row">
+                            <div class="col-md-3 text-right">
+                                <img src="{{url('uin.png')}}" class="w-100">
+                            </div>
+                            <div class="col-md-9">
+                                <h2 class="text-success">Universitas Islam Negri Sunan Gunung Djati Bandung</h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <ol class="breadcrumb shadow-sm bg-white">
                     <li class="breadcrumb-item"><a href="{{url('')}}"><span class="badge badge-success text-white"><i class="fa fa-hdd-o"></i></span></a></li>
