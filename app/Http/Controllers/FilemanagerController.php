@@ -18,7 +18,7 @@ class FilemanagerController extends Controller
     public function repo($slashData = null, Request $request){
         if(Storage::disk('share')->exists($slashData) and Storage::disk('share')->get($slashData)){
             $ext=pathinfo(storage_path($slashData),PATHINFO_EXTENSION);
-            $viewerExt=array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'zip', 'rar');
+            $viewerExt=array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf');
             if(in_array($ext,$viewerExt) and $request->input('download') != 'yes')
                 return view('previewRepo')
                     ->with('breadcrumb',explode('/',$slashData));
@@ -37,7 +37,7 @@ class FilemanagerController extends Controller
                 $datafiles=Storage::disk('share')->files($slashData);
                 $dataDirectories=Storage::disk('share')->directories($slashData);                    
             }
-            $viewerExt=array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf', 'zip', 'rar');
+            $viewerExt=array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf');
             return view('listRepo')
                 ->with('viewerExt',$viewerExt)
                 ->with('datafiles',$datafiles)
